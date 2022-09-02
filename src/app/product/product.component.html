@@ -1,0 +1,161 @@
+<!-- <div style="text-align:center">
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">Add Product</button>
+</div>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products; index as i">
+      <th scope="row">{{i+1}}</th>
+      <td>{{product.name}}</td>
+      <td>{{product.description}}</td>
+      <td>{{product.price}}</td>
+      <td>
+        <button type="button" class="btn btn-info" (click)="openModal(template, product)">Edit</button>
+        <button type="button" class="btn btn-danger" (click)="delete(product)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{modalTitle}}</h4>
+    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Product Name</label>
+      <input type="text" class="form-control" placeholder="Enter Product Name" [formControl]="name">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Product Description</label>
+      <input type="text" class="form-control" placeholder="Enter Product Description" [formControl]="description">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Product Price per unit</label>
+      <input type="text" class="form-control" placeholder="Enter Product Price" [formControl]="price">
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="modalRef?.hide()">{{btnTitle}}</button>
+
+</ng-template>
+  </div> -->
+
+<div class="container">
+
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-warning" routerLink="/homePage">Homepage</button>
+    <!-- <button type="button" class="btn btn-success" routerLink="/userArea">Your Profile</button> -->
+    <button type="button" class="btn btn-success" routerLink="/cart">Your Cart</button>
+  </div>
+
+
+  <!--
+  -------------------------------------------------------------------------------------
+  Sezione da abilitare solo in caso di necessità per aggiungere dei prodotti alla lista
+  -------------------------------------------------------------------------------------
+-->
+  <!-- <br>
+  <div style="text-align: center ;">
+    <button type="button" class="btn btn-primary" (click)="openModal(template)">Add Product</button>
+  </div> -->
+  <!--
+  -------------------------------------------------------------------------------------
+  Sezione da abilitare solo in caso di necessità per aggiungere dei prodotti alla lista
+  -------------------------------------------------------------------------------------
+-->
+
+  <br>
+
+  <div *ngIf="products.length > 0">
+    <table class="table" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+      <thead style="background-color: rgb(234, 234, 234) !important; border-bottom: 2px solid rgb(96, 96, 96);">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Price</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let product of products; index as i">
+          <th scope="row">{{i+1}}</th>
+          <td>{{product.name}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.price}}€</td>
+          <td>
+            <!--
+          -------------------------------------------------------------------------------------------------
+          Sezione da abilitare solo in caso di necessità per modificare o eliminare dei prodotti alla lista
+          -------------------------------------------------------------------------------------------------
+          -->
+
+            <!-- <button type="button" class="btn btn-info " (click)="openModal(template, product)">Edit</button>
+          <button type="button" class="btn btn-danger" (click)="delete(product)">Delete</button>  -->
+
+            <!--
+          -------------------------------------------------------------------------------------------------
+          Sezione da abilitare solo in caso di necessità per modificare o eliminare dei prodotti alla lista
+          -------------------------------------------------------------------------------------------------
+          -->
+            <button type="button" class="btn btn-warning w-100" (click)="addToCart(product.id)"> + </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div *ngIf="products.length === 0" class="text-center">
+    <div class="spinner-border m-5 text-danger"  style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <br>
+
+
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{modalTitle}}</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Product Name</label>
+        <input type="text" class="form-control" placeholder="Enter Product Name" [formControl]="name">
+        <small *ngIf="name.errors?.['required'] && showError"> <b> *Name is required</b> </small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Product Description</label>
+        <input type="text" class="form-control" placeholder="Enter Product Description" [formControl]="description">
+        <small *ngIf="description.errors?.['required'] && showError"> <b> *Description is required</b> </small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Product Price</label>
+        <input type="number" class="form-control" placeholder="Enter Product Price" [formControl]="price">
+        <small *ngIf="price.errors?.['required'] && showError"> <b> *Price is required</b> </small>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="save()">{{btnTitle}}</button>
+    </div>
+  </ng-template>
+
+</div>

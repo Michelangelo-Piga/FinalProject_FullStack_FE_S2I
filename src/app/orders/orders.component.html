@@ -1,0 +1,137 @@
+<div class="container ">
+
+
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-success" routerLink="/products">Products</button>
+    <button type="button" class="btn btn-info" routerLink="/userArea">Your Profile</button>
+    <button class="btn btn-warning" routerLink="/cart">Your Cart</button>
+
+  </div>
+
+  <div class="orders" *ngFor="let order of serviceProduct; index as i">
+    <h3>Order date: {{ order.created_at }} <br>
+      Total Price: <strong>{{ order.totals }}€</strong>
+    </h3>
+    <table class="table " style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+      <thead style="background-color: rgb(234, 234, 234) !important; border-bottom: 2px solid rgb(96, 96, 96);">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let product of order.orders; index as l">
+          <th>{{ l+1 }}</th>
+          <th>{{ product.name }}</th>
+          <th>{{ product.price }} €</th>
+          <th>{{ product.quantity }}</th>
+        </tr>
+        <!-- <tr>
+          <th><strong>Total Price: {{ order.totals }}€</strong> </th>
+        </tr> -->
+
+      </tbody>
+
+    </table>
+
+    <hr />
+
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container ">
+
+
+    
+
+
+  
+    
+    -------------------------------------------------------------------------------------
+    Sezione da abilitare solo in caso di necessità per aggiungere dei prodotti alla lista
+    -------------------------------------------------------------------------------------
+  
+    <br>
+    <div style="text-align: center ;">
+      <button type="button" class="btn btn-primary" (click)="openModal(template)">Add Product</button>
+    </div>
+    
+    -------------------------------------------------------------------------------------
+    Sezione da abilitare solo in caso di necessità per aggiungere dei prodotti alla lista
+    -------------------------------------------------------------------------------------
+  -->
+
+
+<!--   
+    <br>
+    <table class="table" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+      <thead style="background-color: rgb(234, 234, 234) !important; border-bottom: 2px solid rgb(96, 96, 96);">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Order Date</th>
+          <th scope="col">Destination</th>
+      
+        </tr>
+      </thead>
+ 
+    </table>
+  
+    <br>
+  
+  
+  
+    <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">placeholder</h4> 
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Destination Name</label>
+          <input type="text" class="form-control" placeholder="Enter Order Destination" [formControl]="destination">
+          <small *ngIf="destination.errors?.['required'] && showError"> <b> *Destination is required</b> </small>
+        </div>
+       
+     
+        <button type="button" class="btn btn-primary" (click)="save()">{{btnTitle}}</button>
+      </div>
+    </ng-template> 
+ 
+
+
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-success" routerLink="/products">Products</button>
+      <button type="button" class="btn btn-info" routerLink="/userArea">Your Profile</button>
+      <button class="btn btn-warning" routerLink="/cart">Your Cart</button>
+   
+    </div>
+  </div>
+   -->

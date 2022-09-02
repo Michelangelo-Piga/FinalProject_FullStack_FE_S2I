@@ -1,0 +1,92 @@
+<!-- <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+          <div class="card text-black">
+            <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/3.webp"
+              class="card-img-top" alt="Apple Computer" />
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="card-title">Believing is seeing</h5>
+                <p class="text-muted mb-4">Apple pro display XDR</p>
+              </div>
+              <div>
+                <div class="d-flex justify-content-between">
+                  <span>Pro Display XDR</span><span>$5,999</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Pro stand</span><span>$999</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Vesa Mount Adapter</span><span>$199</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between total font-weight-bold mt-4">
+                <span>Total</span><span>$7,197.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+<div class="container ">
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-warning" routerLink="/homePage">Homepage</button>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-success" routerLink="/products">Products</button>
+  </div>
+  <div *ngIf="this.products.length > 0">
+    <table class="table mt-5" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+      <thead style="background-color: rgb(234, 234, 234) !important; border-bottom: 2px solid rgb(96, 96, 96);">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Actions</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let cartProduct of products; index as i">
+          <td>{{cartProduct.id_product}}</td>
+          <td>{{cartProduct.name}}</td>
+          <td>
+            <div class="d-flex">
+              <button class="btn btn-light btn-sm"
+                (click)="updateQuantityMinus(cartProduct.id_cart, cartProduct.quantity)"> - </button>
+              <div>
+                <p class="card-text mx-2">{{cartProduct.quantity}}</p>
+              </div>
+              <button class="btn btn-light btn-sm"
+                (click)="updateQuantityPlus(cartProduct.id_cart, cartProduct.quantity)"> + </button>
+            </div>
+          </td>
+          <td>{{priceMoltiplicator(cartProduct.quantity, cartProduct.price)}} €</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="deleteCart(cartProduct.id_cart)">Remove</button>
+            <!-- <button type="button" class="btn btn-light" (click)="addToOrders(cartProduct.id_cart)">One-click Purchase</button> -->
+            <!-- <button type="button" class="btn btn-light" routerLink="">Order</button> -->
+          </td>
+          <!-- (click)="delete(cartProduct)" -->
+        </tr>
+
+
+      </tbody>
+
+    </table>
+    <div class="d-flex justify-content-center mt-5 mb-4">
+      <button type="button" class="btn btn-light" (click)="purchaseOrders()" routerLink="/confirmationPage">Purchase</button>
+    </div>
+  </div>
+  <div *ngIf="this.products.length === 0">
+    <img src="../../assets/Cart empty Go back and choose a product (2).png" class="img-fluid">
+
+  </div>
+
+
+
+  <br>
+
+</div>
